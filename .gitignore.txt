@@ -1,0 +1,15 @@
+decryptlogs.py
+EmailKeylogger.py
+Keylogger.py
+
+encryption_key.key
+generate_key.py
+
+key_log.txt
+
+ServerKeylogger.spec
+
+.idea/
+/build/
+/dist/
+/.idea/
