@@ -63,6 +63,23 @@ This script gathers detailed system, network, and hardware information.
 - Collects OS, IP, geolocation, VPN status, CPU, memory, and disk usage.
 - Displays information for troubleshooting or educational analysis.
 
+
+**APIs/Modules:**  
+- `psutil`: For system and hardware information such as CPU and memory.
+- `socket` and `requests.get`: For network-related details, including IP and geolocation.
+- **External API: ipapi.co** - Fetches geolocation and network details based on public IP.
+
+**Example API Call:**
+ ```python
+geo_info = requests.get(f'https://ipapi.co/{public_ip}/json').json()
+```
+- **External API: ipify.org** - Fetches  public IP.
+
+**Example API Call:**
+```python
+public_ip = requests.get('https://api.ipify.org', timeout=10).text.strip()
+```
+
 **Usage:**  
 1. Install dependencies:
    ```bash
