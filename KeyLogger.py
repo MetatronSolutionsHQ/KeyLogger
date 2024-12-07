@@ -9,12 +9,10 @@ import time
 key_file = "encryption_key.key"
 
 if os.path.exists(key_file):
-    # If the key file exists, read the key from it
     with open(key_file, "rb") as f:
         key = f.read()
     cipher = Fernet(key)
 else:
-    # If the key file does not exist, generate a new key and save it to the file
     key = Fernet.generate_key()
     with open(key_file, "wb") as f:
         f.write(key)
