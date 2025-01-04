@@ -1,19 +1,17 @@
-KeyLogger/Basic-Keylogger.py
-KeyLogger/decryptlogs.py
-SystemInfo-Logger/Geo-Location.py
-KeyLogger/KeyStroke Logger.py
-
-KeyLogger/encryption_key.key
-generate_key.py
+docs/discord_webhook
 
 key_log.txt
 ServerKeylogger.py
 ServerKeylogger.spec
 
-discord_webhook
+src/KeyLogger/Basic-Keylogger.py
+src/KeyLogger/decryptlogs.py
+src/KeyLogger/encryption_key.key
+src/KeyLogger/KeyStroke Logger.py
 
-SystemInfo-Logger/demo.py
-SystemInfo-Logger/new.py
+src/SystemInfo-Logger/demo.py
+src/SystemInfo-Logger/new.py
+src/SystemInfo-Logger/Geo-Location.py
 
 .idea/
 /build/

